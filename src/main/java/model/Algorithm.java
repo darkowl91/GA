@@ -1,6 +1,6 @@
 package model;
 
-import constants.ModelConsatants;
+import constants.ModelConstants;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -19,7 +19,6 @@ public class Algorithm {
   private GeneticModel model;
   private SimpleStringProperty chromosomeBest;
   private Chromosome chromosome;
-
 
   public Algorithm(GeneticModel model, int number, Chromosome chromosome) {
     this.number = new SimpleIntegerProperty(number);
@@ -84,10 +83,9 @@ public class Algorithm {
     return chromosome;
   }
 
-  private double countDelta(){
+  private double countDelta() {
     double deltaValue;
-    deltaValue = Math.abs(this.getAdaptValue() - ModelConsatants.MIN_ADAPTATION_VALUE);
+    deltaValue = Math.abs(this.getAdaptValue() - ModelConstants.MIN_ADAPTATION_VALUE);
     return deltaValue;
   }
-
 }

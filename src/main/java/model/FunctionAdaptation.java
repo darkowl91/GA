@@ -1,16 +1,15 @@
 package model;
 
-import constants.ModelConsatants;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import constants.ModelConstants;
 import util.ChromosomeComparator;
 import util.ChromosomeConverter;
 import util.PointNode;
 
-
 public final class FunctionAdaptation {
-
 
   private double adaptationValue(double x1, double x2) {
     double a = 1 + Math.pow(x1 - 2, 2) + Math.pow(x2 - 10, 2);
@@ -27,10 +26,10 @@ public final class FunctionAdaptation {
     List<Chromosome> chromosomesAdapted = new ArrayList<>();
     List<PointNode> rectNodes = null;
     switch (model.getGridView()) {
-      case ModelConsatants.GRID_VIEW_RECTANGLE:
+      case ModelConstants.GRID_VIEW_RECTANGLE:
         rectNodes = model.getGridTools().getRectNodes();
         break;
-      case ModelConsatants.GRID_VIEW_BOX:
+      case ModelConstants.GRID_VIEW_BOX:
         rectNodes = model.getGridTools().getBoxNodes();
         break;
     }

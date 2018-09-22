@@ -3,12 +3,12 @@ package util;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
 import model.Algorithm;
 import model.Chromosome;
 import model.GeneticModel;
 
 public class BestWorkFinder {
-
 
   /**
    * Find best chromosome in last generation for i tick

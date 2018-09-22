@@ -1,8 +1,6 @@
 package constants;
 
-public final class ModelConsatants {
-
-  private ModelConsatants() {}
+public final class ModelConstants {
 
   public static final Integer minPointNumber = 7;
   public static final Integer maxPointNumber = 11;
@@ -16,4 +14,6 @@ public final class ModelConsatants {
   public static final double GRID_BEGIN = -10;
   public static final double GRID_END = 20;
   public static final double MIN_ADAPTATION_VALUE = -1.01439037;
+
+  private ModelConstants() {}
 }

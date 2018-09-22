@@ -1,7 +1,8 @@
 package model;
 
-import constants.ModelConsatants;
 import java.util.List;
+
+import constants.ModelConstants;
 import javafx.scene.Group;
 import util.GridTools;
 
@@ -21,8 +22,7 @@ public class GeneticModel {
   private Group gridGroup;
   private double adaptationValue;
 
-  public GeneticModel() {
-  }
+  public GeneticModel() {}
 
   public GeneticModel(GridTools gridTools, Selection selection, Sex sex, Mutation mutation) {
     this.gridTools = gridTools;
@@ -56,7 +56,6 @@ public class GeneticModel {
 
   public void setSelectionMod(String selectionMod) {
     this.selectionMod = selectionMod;
-
   }
 
   public Selection doSelection() {
@@ -82,16 +81,16 @@ public class GeneticModel {
     return generationNumber;
   }
 
+  public void setGenerationNumber(int generationNumber) {
+    this.generationNumber = generationNumber;
+  }
+
   public List<Chromosome> getChromosomes() {
     return chromosomes;
   }
 
   public void setChromosomes(List<Chromosome> chromosomes) {
     this.chromosomes = chromosomes;
-  }
-
-  public void setGenerationNumber(int generationNumber) {
-    this.generationNumber = generationNumber;
   }
 
   public double getProbability() {
@@ -131,12 +130,12 @@ public class GeneticModel {
     return sexMod;
   }
 
-  public Group getGridGroup() {
-    return gridGroup;
-  }
-
   public void setSexMod(String sexMod) {
     this.sexMod = sexMod;
+  }
+
+  public Group getGridGroup() {
+    return gridGroup;
   }
 
   public Sex getSex() {
@@ -155,16 +154,15 @@ public class GeneticModel {
     this.adaptationValue = adaptationValue;
   }
 
-
   public void buidGrid() {
 
     try {
       switch (gridView) {
-        case ModelConsatants.GRID_VIEW_RECTANGLE:
+        case ModelConstants.GRID_VIEW_RECTANGLE:
           gridGroup = gridTools.getRectangleGrid(pointCount);
           gridTools.createAxis();
           break;
-        case ModelConsatants.GRID_VIEW_BOX:
+        case ModelConstants.GRID_VIEW_BOX:
           gridGroup = gridTools.getBoxGrid(pointCount);
           gridTools.createAxis();
           break;
@@ -178,10 +176,10 @@ public class GeneticModel {
   private void buidSelection() {
     try {
       switch (selectionMod) {
-        case ModelConsatants.SELECTION_MODE_RULETTE:
+        case ModelConstants.SELECTION_MODE_RULETTE:
           selection.createRulletSelection(pointCount, chromosomes);
           break;
-        case ModelConsatants.SELECTION_MODE_RANG:
+        case ModelConstants.SELECTION_MODE_RANG:
           selection.createRangSelection(pointCount, chromosomes);
           break;
       }
@@ -193,10 +191,10 @@ public class GeneticModel {
   private void buildSex() {
     try {
       switch (sexMod) {
-        case ModelConsatants.SEX_MODE_BETTERWORSE:
+        case ModelConstants.SEX_MODE_BETTERWORSE:
           sex.findBetterWorsePair(chromosomes);
           break;
-        case ModelConsatants.SEX_MODE_MINDIST:
+        case ModelConstants.SEX_MODE_MINDIST:
           sex.findMinDistancePair(chromosomes);
           break;
       }
@@ -208,10 +206,10 @@ public class GeneticModel {
   private void buildAlgorithmSex() {
     try {
       switch (sexMod) {
-        case ModelConsatants.SEX_MODE_BETTERWORSE:
+        case ModelConstants.SEX_MODE_BETTERWORSE:
           sex.findBetterWorsePairAlgorithm(chromosomes);
           break;
-        case ModelConsatants.SEX_MODE_MINDIST:
+        case ModelConstants.SEX_MODE_MINDIST:
           sex.findMinDistancePairAlgorithm(chromosomes);
           break;
       }
@@ -222,9 +220,21 @@ public class GeneticModel {
 
   @Override
   public String toString() {
-    return "GeneticModel{" + "pointCount=" + pointCount
-    + ", gridView=" + gridView + ", selectionMod="
-    + selectionMod + ", sexMod=" + sexMod
-    + ", generationNumber=" + generationNumber + ", probability=" + probability + ", adaptValue=" + adaptationValue + '}';
+    return "GeneticModel{"
+        + "pointCount="
+        + pointCount
+        + ", gridView="
+        + gridView
+        + ", selectionMod="
+        + selectionMod
+        + ", sexMod="
+        + sexMod
+        + ", generationNumber="
+        + generationNumber
+        + ", probability="
+        + probability
+        + ", adaptValue="
+        + adaptationValue
+        + '}';
   }
 }

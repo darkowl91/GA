@@ -2,13 +2,14 @@ package util;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import constants.ModelConstants;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.LineTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
 import javafx.scene.text.Text;
-import constants.ModelConsatants;
 
 public class GridTools {
 
@@ -20,7 +21,6 @@ public class GridTools {
   private double h;
   private double w;
   private Group groupGrid;
-
 
   public GridTools(Color color, double lineWidth, double w, double h) {
     this.rectNodes = new ArrayList<>();
@@ -46,16 +46,16 @@ public class GridTools {
       for (int j = 0; j < rectNodesArray[i].length; j++) {
         double x = i * h;
         double y = j * w;
-        //move to start point
+        // move to start point
         MoveTo moveToh = new MoveTo(h, y);
         path.getElements().add(moveToh);
-        //draw line
+        // draw line
         LineTo lineToh = new LineTo(x, y);
         path.getElements().add(lineToh);
-        //move to start point
+        // move to start point
         MoveTo moveTov = new MoveTo(x, w);
         path.getElements().add(moveTov);
-        //drawline
+        // drawline
         LineTo lineTov = new LineTo(x, y);
         path.getElements().add(lineTov);
         PointNode pn = new PointNode(x, y);
@@ -74,10 +74,11 @@ public class GridTools {
     gridGroup.getChildren().add(path);
     for (int i = 0; i < 1; i++) {
       for (int j = 0; j < 1; j++) {
-        //--------\-------
+        // --------\-------
         PointNode p1Left = new PointNode(rectNodesArray[i][j].getX(), rectNodesArray[i][j].getY());
         MoveTo moveToh = new MoveTo(p1Left.getX(), p1Left.getY());
-        PointNode p2Left = new PointNode(rectNodesArray[i + 1][j + 1].getX(), rectNodesArray[i + 1][j + 1].getY());
+        PointNode p2Left =
+            new PointNode(rectNodesArray[i + 1][j + 1].getX(), rectNodesArray[i + 1][j + 1].getY());
         LineTo righBottomCorner = new LineTo(p2Left.getX(), p2Left.getY());
 
         PointNode middlePoint1Left = getMiddlePoint(p1Left, p2Left);
@@ -85,10 +86,12 @@ public class GridTools {
         PointNode middlePoint3Left = getMiddlePoint(middlePoint1Left, p2Left);
         boxNodes.add(middlePoint2Left);
         boxNodes.add(middlePoint3Left);
-        //------/--------
-        PointNode p1Right = new PointNode(rectNodesArray[i][j + 1].getX(), rectNodesArray[i][j + 1].getY());
+        // ------/--------
+        PointNode p1Right =
+            new PointNode(rectNodesArray[i][j + 1].getX(), rectNodesArray[i][j + 1].getY());
         MoveTo moveToW = new MoveTo(p1Right.getX(), p1Right.getY());
-        PointNode p2Right = new PointNode(rectNodesArray[i + 1][j].getX(), rectNodesArray[i + 1][j].getY());
+        PointNode p2Right =
+            new PointNode(rectNodesArray[i + 1][j].getX(), rectNodesArray[i + 1][j].getY());
         LineTo rightTopCorner = new LineTo(p2Right.getX(), p2Right.getY());
 
         PointNode middlePoint1Right = getMiddlePoint(p1Right, p2Right);
@@ -97,9 +100,9 @@ public class GridTools {
         boxNodes.add(middlePoint1Right);
         boxNodes.add(middlePoint2Right);
         boxNodes.add(middlePoint3Right);
-        //aditional points to large grid
+        // aditional points to large grid
         if (pointNumber > 9) {
-          //--------__.__----------
+          // --------__.__----------
           boxNodes.add(getMiddlePoint(p1Left, p1Right));
           boxNodes.add(getMiddlePoint(p2Left, p1Right));
           boxNodes.add(getMiddlePoint(p2Left, p2Right));
@@ -118,61 +121,58 @@ public class GridTools {
     return new PointNode(x, y);
   }
 
-
-   //TODO: fix for more or les points then 7..11
+  // TODO: fix for more or les points then 7..11
   private PointNode[][] generateRectGrid(int pointNumber) {
-    //check size
+    // check size
     // for 7..9 get grid3x3
-    if (pointNumber >= ModelConsatants.minPointNumber
-    && pointNumber <= 9) {
+    if (pointNumber >= ModelConstants.minPointNumber && pointNumber <= 9) {
       return new PointNode[3][3];
-    } //for 9..11 get grid4x4
-    else if (pointNumber > 9
-    && pointNumber <= ModelConsatants.maxPointNumber) {
+    } // for 9..11 get grid4x4
+    else if (pointNumber > 9 && pointNumber <= ModelConstants.maxPointNumber) {
       return new PointNode[4][4];
     }
     return new PointNode[2][2];
   }
-  //</editor-fold>
+  // </editor-fold>
 
-  //<editor-fold defaultstate="collapsed" desc="Axis static">
+  // <editor-fold defaultstate="collapsed" desc="Axis static">
   public Group createAxis() throws Exception {
     Path path = pathCreate();
     path.setStrokeWidth(0.5);
     path.setStroke(Color.ORANGE);
-    //delta
+    // delta
     // use for aditional legth to axis end or begin
     double delta = 5;
     double deltaY = 10;
-    //first
+    // first
     double x1 = getRectNodeses()[0][0].getX();
     double y1 = getRectNodeses()[0][0].getY();
-    //nodes count
+    // nodes count
     int rectCountX = getRectNodeses().length;
     int rectCountY = getRectNodeses()[0].length;
-    //last
+    // last
     double x2 = getRectNodeses()[0][rectCountX - 1].getX();
     double y2 = getRectNodeses()[0][rectCountY - 1].getY();
-    //coordinats real
+    // coordinats real
     double realX1 = x1 + (rectCountX - 1) * w / 3;
     double realY1 = y1 - h / 3;
     double realX2 = x2 + (rectCountX - 1) * w / 3;
     double realY2 = y2 - (rectCountY - 1) * h / 3;
 
-    //move to begin axis (top)
+    // move to begin axis (top)
     MoveTo moveToY = new MoveTo(realX1, realY1);
-    Text textbeginY = new Text(moveToY.getX() + delta, moveToY.getY() +15*delta, "20");
-    //draw y axis
+    Text textbeginY = new Text(moveToY.getX() + delta, moveToY.getY() + 15 * delta, "20");
+    // draw y axis
     LineTo lineToY = new LineTo(realX1, h * rectCountY - h / 3);
-    Text textendY = new Text(lineToY.getX(), lineToY.getY()  -30*delta, "-10");
-    //move to center coordinats
+    Text textendY = new Text(lineToY.getX(), lineToY.getY() - 30 * delta, "-10");
+    // move to center coordinats
     MoveTo moveToX = new MoveTo(realX2, realY2);
-    Text textZERO = new Text(moveToX.getX() + delta , moveToX.getY() - delta, "0");
-    //draw x axis
+    Text textZERO = new Text(moveToX.getX() + delta, moveToX.getY() - delta, "0");
+    // draw x axis
     LineTo lineToX = new LineTo(w * rectCountX - w / 3, realY2);
-    Text textbeginX = new Text(lineToX.getX() - 30*delta, lineToX.getY(), "20");
+    Text textbeginX = new Text(lineToX.getX() - 30 * delta, lineToX.getY(), "20");
     LineTo lineToXInvert = new LineTo(x2 - w / 3 - delta, realY2);
-    Text textendX = new Text(lineToXInvert.getX() + 10*delta, lineToXInvert.getY()  , "-10");
+    Text textendX = new Text(lineToXInvert.getX() + 10 * delta, lineToXInvert.getY(), "-10");
 
     path.getElements().addAll(moveToY, lineToY, moveToX, lineToX, moveToX, lineToXInvert);
     Group group = new Group(path, textbeginX, textbeginY, textZERO, textendX, textendY);
@@ -201,16 +201,21 @@ public class GridTools {
   }
 
   public PointNode converToX1X2(PointNode pointNode) {
-    double deltaX = (pointNode.getX() * ModelConsatants.GRID_DELTA) / (w * (rectNodesArray.length - 1));
-    double x1 = ModelConsatants.GRID_BEGIN + deltaX;
-    double deltaY = (pointNode.getY() * ModelConsatants.GRID_DELTA) / (h * (rectNodesArray.length - 1));
-    double x2 = ModelConsatants.GRID_END - deltaY;
+    double deltaX =
+        (pointNode.getX() * ModelConstants.GRID_DELTA) / (w * (rectNodesArray.length - 1));
+    double x1 = ModelConstants.GRID_BEGIN + deltaX;
+    double deltaY =
+        (pointNode.getY() * ModelConstants.GRID_DELTA) / (h * (rectNodesArray.length - 1));
+    double x2 = ModelConstants.GRID_END - deltaY;
     return new PointNode(x1, x2);
   }
 
   public PointNode convertToXY(PointNode pointNode) {
-    double X = ((pointNode.getX() + 10) * w * (rectNodesArray.length - 1)) / ModelConsatants.GRID_DELTA;
-    double Y = ((ModelConsatants.GRID_END - pointNode.getY()) * h * (rectNodesArray.length - 1)) / ModelConsatants.GRID_DELTA;
+    double X =
+        ((pointNode.getX() + 10) * w * (rectNodesArray.length - 1)) / ModelConstants.GRID_DELTA;
+    double Y =
+        ((ModelConstants.GRID_END - pointNode.getY()) * h * (rectNodesArray.length - 1))
+            / ModelConstants.GRID_DELTA;
     return new PointNode(X, Y);
   }
 

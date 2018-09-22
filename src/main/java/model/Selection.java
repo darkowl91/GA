@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
 import util.ChromosomeComparator;
 
 public class Selection {
@@ -31,7 +32,7 @@ public class Selection {
         index = rnd.nextInt(resultSet.size());
         forAdd = resultSet.get(index);
         repeat++;
-      } while (candidates.contains(forAdd) &&  repeat< 10);
+      } while (candidates.contains(forAdd) && repeat < 10);
       candidates.add(forAdd);
     }
   }
@@ -65,7 +66,7 @@ public class Selection {
     Chromosome c;
     ArrayList<Double> difference = new ArrayList<>();
     for (int i = 0; i < resultCount; i++) {
-      int   repeat = 0;
+      int repeat = 0;
       do {
         repeat++;
         difference.clear();
@@ -76,11 +77,11 @@ public class Selection {
         double minDif = Collections.min(difference);
         index = difference.indexOf(minDif);
         c = candidates.get(index);
-        //TODO: Fix
+        // TODO: Fix
       } while (chromosomes.contains(c) && repeat < 10);
       chromosomes.add(c);
     }
-    //TODO: Fix
+    // TODO: Fix
     candidates.clear();
     candidates.addAll(chromosomes);
   }

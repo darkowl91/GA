@@ -13,7 +13,9 @@ import javafx.scene.paint.RadialGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 
-public class CircleCreator {
+public final class CircleCreator {
+
+  private CircleCreator() {}
 
   public static Circle createCircle(double x, double y, int radius, Color color) {
     final Circle circle =

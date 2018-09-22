@@ -10,12 +10,12 @@ import model.Mutation;
 
 public class ChromosomeConverter {
 
-  private ChromosomeConverter() {}
-
   private static final String EMPTY_FIELD = "";
   private static final String DOT = "\\.";
   private static int MIN_LENGTH_INT_PART = 5;
   private static int MIN_LENGTH_FRACT_PART = 3;
+
+  private ChromosomeConverter() {}
 
   public static String numberToChromosome(double x1, double x2) {
 

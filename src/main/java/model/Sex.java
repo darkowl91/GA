@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+
 import util.ChromosomeComparator;
 import util.ChromosomeConverter;
 
@@ -48,7 +49,6 @@ public final class Sex {
           y = candidates.get(i).getPoint().getY() - candidates.get(j).getPoint().getY();
           distance[i][j] = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
         }
-
       }
     }
     int number = 0;
@@ -67,14 +67,14 @@ public final class Sex {
 
       String[] zigota;
       Chromosome result;
-      zigota = doSex(candidates.get(parent1).getChromosome(), candidates.get(parent2).getChromosome());
+      zigota =
+          doSex(candidates.get(parent1).getChromosome(), candidates.get(parent2).getChromosome());
       for (String chromosome : zigota) {
 
         if (ChromosomeConverter.checkPoint(chromosome)) {
           result = new Chromosome(chromosome);
           chromosomes.add(result);
         }
-
       }
       number++;
     }
@@ -94,7 +94,8 @@ public final class Sex {
     for (int i = 1; i < candidatesList.size(); i++) {
       do {
         zigota = doSex(alphaSamec.getChromosome(), candidatesList.get(i).getChromosome());
-      } while (!ChromosomeConverter.checkPoint(zigota[0]) && !ChromosomeConverter.checkPoint(zigota[1]));
+      } while (!ChromosomeConverter.checkPoint(zigota[0])
+          && !ChromosomeConverter.checkPoint(zigota[1]));
       for (String chromosome : zigota) {
         if (ChromosomeConverter.checkPoint(chromosome)) {
           result = new Chromosome(chromosome);
@@ -154,11 +155,19 @@ public final class Sex {
           str_probability = chromosome.substring(14, 21);
         }
 
-        chromosome = prefixPointCount + str_pointCount + gridView + selection + sex + prefixGenNumber + str_generatioNumber + prefixProbability + str_probability;
+        chromosome =
+            prefixPointCount
+                + str_pointCount
+                + gridView
+                + selection
+                + sex
+                + prefixGenNumber
+                + str_generatioNumber
+                + prefixProbability
+                + str_probability;
 
         result = new Chromosome(chromosome);
         chromosomes.add(result);
-
       }
     }
     candidates.clear();
@@ -187,7 +196,6 @@ public final class Sex {
           y = candidates.get(i).getPoint().getY() - candidates.get(j).getPoint().getY();
           distance[i][j] = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
         }
-
       }
     }
     int number = 0;
@@ -206,7 +214,8 @@ public final class Sex {
 
       String[] zigota;
       Chromosome result;
-      zigota = doSex(candidates.get(parent1).getChromosome(), candidates.get(parent2).getChromosome());
+      zigota =
+          doSex(candidates.get(parent1).getChromosome(), candidates.get(parent2).getChromosome());
       for (String chromosome : zigota) {
         int pointCount = Integer.parseInt(chromosome.substring(0, 5), 2);
         int genNumber = Integer.parseInt(chromosome.substring(8, 14), 2);
@@ -239,13 +248,19 @@ public final class Sex {
           str_probability = chromosome.substring(14, 21);
         }
 
-        chromosome = prefixPointCount + str_pointCount + gridView + selection + sex + prefixGenNumber + str_generatioNumber + prefixProbability + str_probability;
-
+        chromosome =
+            prefixPointCount
+                + str_pointCount
+                + gridView
+                + selection
+                + sex
+                + prefixGenNumber
+                + str_generatioNumber
+                + prefixProbability
+                + str_probability;
 
         result = new Chromosome(chromosome);
         chromosomes.add(result);
-
-
       }
       number++;
     }

@@ -3,17 +3,30 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import util.ChromosomeConverter;
 
 public final class Mutation {
 
   private double probability;
 
-  public Mutation() {
-  }
+  public Mutation() {}
 
   public Mutation(double probability) {
     this.probability = probability;
+  }
+
+  public static String reverse(String chromosome) {
+    StringBuilder reverseChromosome = new StringBuilder(chromosome);
+    for (int i = 0; i < reverseChromosome.length(); i++) {
+      if (reverseChromosome.charAt(i) == '1') {
+        reverseChromosome.replace(i, i + 1, "0");
+      } else {
+        reverseChromosome.replace(i, i + 1, "1");
+      }
+    }
+    String out_chromosome = new String(reverseChromosome);
+    return out_chromosome;
   }
 
   public double getProbability() {
@@ -53,19 +66,6 @@ public final class Mutation {
     }
     String mutant = new String(chromosome_to_change);
     return mutant;
-  }
-
-  public static String reverse(String chromosome) {
-    StringBuilder reverseChromosome = new StringBuilder(chromosome);
-    for (int i = 0; i < reverseChromosome.length(); i++) {
-      if (reverseChromosome.charAt(i) == '1') {
-        reverseChromosome.replace(i, i + 1, "0");
-      } else {
-        reverseChromosome.replace(i, i + 1, "1");
-      }
-    }
-    String out_chromosome = new String(reverseChromosome);
-    return out_chromosome;
   }
 
   public void doMutation(List<Chromosome> parents) {
@@ -124,7 +124,16 @@ public final class Mutation {
         str_probability = mutant.substring(14, 21);
       }
 
-      mutant = prefixPointCount + str_pointCount + gridView + selection + sex + prefixGenNumber + str_generatioNumber + prefixProbability + str_probability;
+      mutant =
+          prefixPointCount
+              + str_pointCount
+              + gridView
+              + selection
+              + sex
+              + prefixGenNumber
+              + str_generatioNumber
+              + prefixProbability
+              + str_probability;
       resultSet.add(new Chromosome(mutant));
     }
     parents.clear();

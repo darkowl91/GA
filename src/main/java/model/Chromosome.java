@@ -105,12 +105,12 @@ public class Chromosome {
     this.adaptValue.setValue(adaptValue);
   }
 
-  public void setChromosome(String s) {
-    this.chromosome.set(s);
-  }
-
   public String getChromosome() {
     return chromosome.get();
+  }
+
+  public void setChromosome(String s) {
+    this.chromosome.set(s);
   }
 
   private String[] separatedChromosome() {
@@ -123,7 +123,13 @@ public class Chromosome {
 
   @Override
   public String toString() {
-    return "Chromosome{" + "generationNumber=" + generationNumber.get()
-    + ", chromosome=" + chromosome.get() + ", adaptValue=" + adaptValue.get() + '}';
+    return "Chromosome{"
+        + "generationNumber="
+        + generationNumber.get()
+        + ", chromosome="
+        + chromosome.get()
+        + ", adaptValue="
+        + adaptValue.get()
+        + '}';
   }
 }
