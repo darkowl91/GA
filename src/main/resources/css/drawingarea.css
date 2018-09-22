@@ -1,0 +1,5 @@
+
+.root {
+    -fx-background-image: url("images/tiny_grid.png");
+    -fx-background-repeat: repeat;
+}
